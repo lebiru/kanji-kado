@@ -57,7 +57,7 @@ public class Splash implements Screen
 		splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		Tween.set(splash, SpriteAccessor.ALPHA).target(0).start(tweenManager); //empty for tweenManager is also ok
-		Tween.to(splash, SpriteAccessor.ALPHA, 2).target(1).repeatYoyo(1, 1).setCallback(new TweenCallback()
+		Tween.to(splash, SpriteAccessor.ALPHA, 2).target(1).repeatYoyo(1, 0.5f).setCallback(new TweenCallback()
 		{
 			@Override
 			public void onEvent(int type, BaseTween<?> source)
