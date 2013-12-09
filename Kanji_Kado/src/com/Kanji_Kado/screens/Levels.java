@@ -34,7 +34,7 @@ public class Levels implements Screen{
 		stage.act(delta);
 		stage.draw();
 		
-		table.drawDebug(stage);
+		//table.drawDebug(stage);
 		
 	}
 
@@ -56,7 +56,7 @@ public class Levels implements Screen{
 		
 		table = new Table(skin);
 		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		table.debug();
+		//table.debug();
 		
 		list = new List(new String[] {"one", "two", "three", "four", "five", "six", "seven", "two", "three", "four", "five", "six", "seven"
 				, "two", "three", "four", "five", "six", "seven", "two", "three", "four", "five", "six", "seven"}, skin);
