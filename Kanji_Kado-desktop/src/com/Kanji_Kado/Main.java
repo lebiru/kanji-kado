@@ -11,8 +11,8 @@ public class Main
 		cfg.title = KanjiKadoGame.TITLE + " v" + KanjiKadoGame.VERSION;
 		cfg.vSyncEnabled = true;
 		cfg.useGL20 = true;
-		cfg.width = 800;
-		cfg.height = 600;
+		cfg.width = 1280;
+		cfg.height = 720;
 		
 		new LwjglApplication(new KanjiKadoGame(), cfg);
 	}

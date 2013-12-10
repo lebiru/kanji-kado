@@ -4,6 +4,10 @@ import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+
 import com.Kanji_Kado.KanjiKadoGame;
 import com.Kanji_Kado.tween.ActorAccessor;
 import com.badlogic.gdx.Game;
@@ -38,14 +42,10 @@ public class MainMenu implements Screen
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
-
-		//Table.drawDebug(stage);
-
-		tweenManager.update(delta);
-
 		stage.act(delta); //update everything in the stage
 		stage.draw(); //everything draws
+
+		tweenManager.update(delta);
 
 	}
 
@@ -72,7 +72,7 @@ public class MainMenu implements Screen
 		table = new Table(skin); //dont have to put skin, but good practice
 		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-		heading = new Label(KanjiKadoGame.TITLE, skin);
+		heading = new Label(KanjiKadoGame.TITLE, skin, "big");
 		heading.setFontScale(2);
 
 		buttonPlay = new TextButton("Play", skin);
@@ -81,8 +81,25 @@ public class MainMenu implements Screen
 			@Override
 			public void clicked(InputEvent event, float x, float y) 
 			{
-				((Game) Gdx.app.getApplicationListener()).setScreen(new Levels());
+				((Game) Gdx.app.getApplicationListener()).setScreen(new LevelMenu());
 
+			}
+		});
+
+		TextButton buttonSettings = new TextButton("Settings", skin);
+		buttonSettings.addListener(new ClickListener() 
+		{
+			@Override
+			public void clicked(InputEvent event, float x, float y) 
+			{
+				stage.addAction(sequence(moveTo(0, -stage.getHeight(), .5f), run(new Runnable() 
+				{
+					@Override
+					public void run() 
+					{
+						((Game) Gdx.app.getApplicationListener()).setScreen(new Settings());
+					}
+				})));
 			}
 		});
 
@@ -97,19 +114,12 @@ public class MainMenu implements Screen
 		});
 		buttonExit.pad(15); // padding around the text of the button
 
-
-
-
-
-		//putting stuff together
-		table.add(heading);
-		table.getCell(heading).spaceBottom(100);
-		table.row(); // adding a new row
-		table.add(buttonPlay);
-		table.getCell(buttonPlay).spaceBottom(15);
-		table.row();
+		// putting stuff together
+		table.add(heading).spaceBottom(100).row();
+		table.add(buttonPlay).spaceBottom(15).row();
+		table.add(buttonSettings).spaceBottom(15).row();
 		table.add(buttonExit);
-		//table.debug(); //enables all the debug lines
+		
 		stage.addActor(table);
 
 		//Creating Tween Animations
@@ -140,13 +150,15 @@ public class MainMenu implements Screen
 		//table fade-in
 		Tween.from(table, ActorAccessor.ALPHA, 0.5f).target(0).start(tweenManager);
 		Tween.from(table, ActorAccessor.Y, 1f).target(Gdx.graphics.getHeight() / 8).start(tweenManager);
+		
+		tweenManager.update(Float.MIN_VALUE);
 
 	}
 
 	@Override
-	public void hide() {
-
-
+	public void hide() 
+	{
+		dispose();
 	}
 
 	@Override
@@ -167,8 +179,6 @@ public class MainMenu implements Screen
 		stage.dispose();
 		atlas.dispose();
 		skin.dispose();
-		//white.dispose();
-
 	}
 
 }

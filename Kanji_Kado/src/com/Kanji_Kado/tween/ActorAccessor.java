@@ -43,6 +43,7 @@ public class ActorAccessor implements TweenAccessor<Actor>
 			break;
 		case RGB:
 			target.setColor(newValues[0], newValues[1], newValues[2], target.getColor().a);
+			break;
 		case ALPHA:
 			target.setColor(target.getColor().r, target.getColor().g, target.getColor().b, newValues[0]);
 			break;

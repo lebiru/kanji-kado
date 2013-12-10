@@ -1,9 +1,9 @@
 info face="OCR A Extended" size=64 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1 outline=0
-common lineHeight=63 base=52 scaleW=256 scaleH=256 pages=4 packed=0 alphaChnl=0 redChnl=4 greenChnl=4 blueChnl=4
-page id=0 file="white64_0.png"
-page id=1 file="white64_1.png"
-page id=2 file="white64_2.png"
-page id=3 file="white64_3.png"
+common lineHeight=63 base=52 scaleW=256 scaleH=256 pages=4 packed=0 alphaChnl=0 redChnl=3 greenChnl=3 blueChnl=3
+page id=0 file="black64_0.png"
+page id=1 file="black64_1.png"
+page id=2 file="black64_2.png"
+page id=3 file="black64_3.png"
 chars count=206
 char id=32   x=23    y=53    width=3     height=1     xoffset=-1    yoffset=62    xadvance=37    page=0  chnl=15
 char id=33   x=192   y=41    width=9     height=40    xoffset=14    yoffset=12    xadvance=37    page=2  chnl=15

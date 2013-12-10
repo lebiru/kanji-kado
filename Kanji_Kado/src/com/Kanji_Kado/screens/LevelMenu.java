@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -14,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class Levels implements Screen{
+public class LevelMenu implements Screen{
 
 	private Stage stage;
 	private Table table;
@@ -39,8 +40,11 @@ public class Levels implements Screen{
 	}
 
 	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
+	public void resize(int width, int height) 
+	{
+		stage.setViewport(width, height, false);
+		table.setClip(true);
+		setupTable();
 		
 	}
 
@@ -66,7 +70,7 @@ public class Levels implements Screen{
 		play = new TextButton("PLAY", skin);
 		play.pad(15);
 		
-		back = new TextButton("BACK", skin, "small");
+		back = new TextButton("BACK", skin);
 		back.addListener(new ClickListener() 
 		{
 			@Override
@@ -77,21 +81,31 @@ public class Levels implements Screen{
 		});
 		back.pad(15);
 		
-		//putting stuff together into table
-		table.add().width(table.getWidth() / 3);
-		table.add("SELECT LEVEL").width(table.getWidth() / 3);
-		table.add().width(table.getWidth() / 3).row();
-		table.add(scrollPane).left().expandY();
-		table.add(play);
-		table.add(back).bottom().right();
+		setupTable();
 		
 		stage.addActor(table);
 		
 	}
+	
+	// Adds everything in the table and resizes it. In an extra method for easier resizing because of table.getWidth() / 3
+	private void setupTable()
+	{
+		table.clear(); // removes all children so we can add them again
+		table.setBounds(0, 0, stage.getWidth(), stage.getHeight());
+		table.add(new Label("Select Levels", skin)).colspan(3).expandX().spaceBottom(50).row();
+		table.add().width(table.getWidth() / 3); // adding three empty cells just for looks
+		table.add().width(table.getWidth() / 3);
+		table.add().width(table.getWidth() / 3).row();
+		table.add(scrollPane).expandY().top().left();
+		table.add(play);
+		table.add(back).bottom().right();
+		
+	}
 
 	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
+	public void hide() 
+	{
+		dispose();
 		
 	}
 

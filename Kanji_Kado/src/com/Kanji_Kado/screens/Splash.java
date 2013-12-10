@@ -29,12 +29,11 @@ public class Splash implements Screen
 		//does the clearing
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		tweenManager.update(delta);
-		
 		//have to do this
 		batch.begin();
 		splash.draw(batch);
 		batch.end();
+		tweenManager.update(delta);
 	}
 
 	@Override
@@ -65,6 +64,8 @@ public class Splash implements Screen
 				((Game)Gdx.app.getApplicationListener()).setScreen(new MainMenu());
 			}
 		}).start(tweenManager);
+		
+		tweenManager.update(Float.MIN_VALUE);
 		
 		
 	}
